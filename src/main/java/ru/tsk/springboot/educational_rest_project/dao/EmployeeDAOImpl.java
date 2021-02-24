@@ -8,6 +8,7 @@ import ru.tsk.springboot.educational_rest_project.entity.Employee;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO{
@@ -34,14 +35,14 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    public Employee getEmployee(int id) {
+    public Employee getEmployee(long id) {
         Session session = entityManager.unwrap(Session.class);
         Employee employee = session.get(Employee.class, id);
         return employee;
     }
 
     @Override
-    public void deleteEmployee(int id) {
+    public void deleteEmployee(long id) {
         Session session = entityManager.unwrap(Session.class);
         Query query = session.createQuery("delete from Employee where id =: employeeId");
         query.setParameter("employeeId", id);
